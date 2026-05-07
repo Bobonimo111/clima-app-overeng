@@ -1,0 +1,26 @@
+services:
+  database:
+    container_name: ppfvp_db
+    image: postgres:14-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES-USER: root
+      POSTGRES-PASSWORD: root
+      POSTGRES-DB: ppfvp
+    restart:
+      on-failure
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  cache:
+    container_name: ppfvp_cache
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --requirepass root
+    volumes:
+      - cache_data:/data
+
+volumes:
+  pgdata:
+  cache_data:
