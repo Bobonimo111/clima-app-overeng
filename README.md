@@ -4,6 +4,7 @@ Aplicação fullstack de clima com integração à API OpenWeatherMap, persistê
 
 ---
 
+
 ## 📋 Índice
 
 - [Requisitos](#requisitos)
@@ -14,8 +15,19 @@ Aplicação fullstack de clima com integração à API OpenWeatherMap, persistê
 - [Classes](#classes)
 
 ---
+## Como rodar a aplicação
+> Para executar o back-end 
+```shell
+> docker-compose up -d
+```
+> Execução do front-end
+```shell
+> npm i
+> npm run dev 
+```
 
-## Requisitos
+
+## Requisitos da aplicação
 
 - A aplicação deve conter uma integração com API e salvar os dados de forma local.
 - A aplicação deve conter no mínimo **3 design patterns**.
