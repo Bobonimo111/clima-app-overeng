@@ -1,0 +1,183 @@
+openapi: 3.0.0
+info:
+  title: Clima Api local
+  version: 1.0.0
+paths:
+  /8080/api/climas/:
+    get:
+      summary: Buscar clima (por Cidade ou Lat/Lon)
+      operationId: getClima
+      description: Retorna o clima atual usando nome da cidade ou coordenadas.
+      parameters:
+        - name: city
+          in: query
+          required: false # Agora opcional, pois pode-se usar lat/lon
+          schema:
+            type: string
+          example: Recife
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          example: -7.995
+        - name: lon
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          example: -35.5806
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WeatherResponse"
+
+  /8080/api/previsoes:
+    get:
+      summary: Buscar previsão (por Cidade ou Lat/Lon)
+      operationId: getPrevisao
+      description: Retorna a lista de previsões.
+      parameters:
+        - name: city
+          in: query
+          required: false
+          schema:
+            type: string
+          example: Recife
+        - name: lat
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          example: -7.995
+        - name: lon
+          in: query
+          required: false
+          schema:
+            type: number
+            format: double
+          example: -35.5806
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/ForecastResponse'
+
+servers:
+  - url: http://localhost:8080 # Ajustei aqui para não ficar 'null'
+
+components:
+  schemas: 
+    WeatherResponse:
+      type: object
+      properties:
+        coord:
+          type: object
+          properties:
+            lon: { type: number, example: -35.5806 }
+            lat: { type: number, example: -7.995 }
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer, example: 802 }
+              main: { type: string, example: "Clouds" }
+              description: { type: string, example: "scattered clouds" }
+              icon: { type: string, example: "03n" }
+        base: { type: string, example: "stations" }
+        main:
+          type: object
+          properties:
+            temp: { type: number, example: 295.05 }
+            feels_like: { type: number, example: 295.59 }
+            temp_min: { type: number, example: 295.05 }
+            temp_max: { type: number, example: 295.05 }
+            pressure: { type: integer, example: 1015 }
+            humidity: { type: integer, example: 88 }
+            sea_level: { type: integer, example: 1015 }
+            grnd_level: { type: integer, example: 984 }
+        visibility: { type: integer, example: 10000 }
+        wind:
+          type: object
+          properties:
+            speed: { type: number, example: 1.59 }
+            deg: { type: integer, example: 198 }
+            gust: { type: number, example: 1.51 }
+        clouds:
+          type: object
+          properties:
+            all: { type: integer, example: 43 }
+        dt: { type: integer, format: int64, example: 1778548658 }
+        sys:
+          type: object
+          properties:
+            country: { type: string, example: "BR" }
+            sunrise: { type: integer, example: 1778487936 }
+            sunset: { type: integer, example: 1778530312 }
+        timezone: { type: integer, example: -10800 }
+        id: { type: integer, example: 3392916 }
+        name: { type: string, example: "Passira" }
+        cod: { type: integer, example: 200 }
+
+    ForecastResponse:
+      type: object
+      properties:
+        cod: { type: string, example: "200" }
+        message: { type: integer, example: 0 }
+        cnt: { type: integer, example: 40 }
+        list:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeatherData'
+
+    WeatherData:
+      type: object
+      properties:
+        dt: { type: integer, format: int64, example: 1778554800 }
+        main:
+          type: object
+          properties:
+            temp: { type: number, example: 294.87 }
+            feels_like: { type: number, example: 295.45 }
+            temp_min: { type: number, example: 294.87 }
+            temp_max: { type: number, example: 294.87 }
+            pressure: { type: integer, example: 1015 }
+            sea_level: { type: integer, example: 1015 }
+            grnd_level: { type: integer, example: 984 }
+            humidity: { type: integer, example: 90 }
+            temp_kf: { type: number, example: 0 }
+        weather:
+          type: array
+          items:
+            type: object
+            properties:
+              id: { type: integer, example: 802 }
+              main: { type: string, example: "Clouds" }
+              description: { type: string, example: "scattered clouds" }
+              icon: { type: string, example: "03n" }
+        clouds:
+          type: object
+          properties:
+            all: { type: integer, example: 27 }
+        wind:
+          type: object
+          properties:
+            speed: { type: number, example: 1.58 }
+            deg: { type: integer, example: 208 }
+            gust: { type: number, example: 1.5 }
+        visibility: { type: integer, example: 10000 }
+        pop: { type: number, example: 0 }
+        sys:
+          type: object
+          properties:
+            pod: { type: string, example: "n" }
+        dt_txt: { type: string, example: "2026-05-12 03:00:00" }
