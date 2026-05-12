@@ -57,6 +57,33 @@ Aplicação fullstack de clima com integração à API OpenWeatherMap, persistê
 
 ---
 
+## Rotas
+
+| Método | Endpoint | Descrição | Parâmetros (Query) | Modelo de Resposta |
+| :--- | :--- | :--- | :--- | :--- |
+| `GET` | `/api/climas/` | Retorna o clima atual em tempo real. | `city` **ou** `lat`, `lon` | `WeatherResponse` |
+| `GET` | `/api/previsoes` | Retorna a previsão detalhada (5 dias). | `city` **ou** `lat`, `lon` | `ForecastResponse` |
+
+---
+
+### Cases
+
+#### 1. Clima Atual por Cidade
+`GET http://localhost:8080/api/climas/?city=Passira`
+
+#### 2. Previsão por Coordenadas
+`GET http://localhost:8080/api/previsoes?lat=-7.995&lon=-35.5806`
+
+
+### Integração com OpenWeather
+
+Esta API consome os dados oficiais da **OpenWeatherMap**. Os endpoints internos fazem o mapeamento das seguintes rotas externas:
+
+* **Clima Atual:** `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={{API-KEY}}`
+* **Previsão (Forecast):** `https://pro.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={{API-KEY}}`
+
+> Parametro "q" pode ser adicionado para buscar pelo nome da cidade [mais informações](https://openweathermap.org/api/current?collection=current_forecast#concept)
+
 ## Arquitetura
 
 > Diagrama de arquitetura da aplicação mostrando o fluxo entre Gateway, Server, Cache, Database e API Externa.
