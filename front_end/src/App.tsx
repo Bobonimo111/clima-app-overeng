@@ -1,14 +1,9 @@
-import './App.css'
+import { HomePage } from "./pages/homePage";
 
-function App() {
-
-  return (
-    <section>
-      <div className='h1 text-3xl font-bold underline'>
-        Hello world!
-      </div>
-    </section>
+export default function App() {
+  return(
+    <div className="w-full h-screen">
+      <HomePage />
+    </div>
   )
 }
-
-export default App
