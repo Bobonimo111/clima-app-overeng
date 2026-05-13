@@ -14,5 +14,6 @@ public class ClimaServiceOffImpl {
     public ClimaServiceOffImpl(ClimaRepository climaRepository) {
         this.climaRepository = climaRepository;
         this.climaMapper = new ClimaMapper(); 
+        
     }
 }

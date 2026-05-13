@@ -11,6 +11,15 @@ public class ClimaMapper {
         if(model == null){
             return null;
         }
+
+        return null;
+    }
+
+    public ClimaModel dtoToClima(ClimaResponse dto){
+        if(dto == null){
+            return null;
+        }
+
         return null;
     }
 }
