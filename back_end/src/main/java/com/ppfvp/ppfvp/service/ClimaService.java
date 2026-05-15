@@ -1,11 +1,12 @@
 package com.ppfvp.ppfvp.service;
 
 import com.ppfvp.ppfvp.dto.ClimaResponse;
+import com.ppfvp.ppfvp.dto.PrevisaoLimpaResponse;
 
 public interface ClimaService {
-    ClimaResponse getForecastByCity(String cityName);
+    PrevisaoLimpaResponse getForecastByCity(String cityName);
 
-    ClimaResponse getForecastByCoord(double lat, double lon);
+    PrevisaoLimpaResponse getForecastByCoord(double lat, double lon);
 
     ClimaResponse getWeatherByCity(String cityName);
 
