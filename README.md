@@ -69,7 +69,7 @@ Aplicação fullstack de clima com integração à API OpenWeatherMap, persistê
 ### Cases
 
 #### 1. Clima Atual por Cidade
-`GET http://localhost:8080/api/climas/?city=Passira`
+`GET http://localhost:8080/api/climas?city=Passira`
 
 #### 2. Previsão por Coordenadas
 `GET http://localhost:8080/api/previsoes?lat=-7.995&lon=-35.5806`
