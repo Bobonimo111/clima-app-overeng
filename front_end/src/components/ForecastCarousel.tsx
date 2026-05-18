@@ -1,23 +1,30 @@
-import type { ForecastData } from '../types';
 import { ForecastCard } from './ForecastCard';
+import { HourlyChart } from './HourlyChart';
+import type { ForecastData } from '../types';
 
 interface ForecastCarouselProps {
   forecast: ForecastData[];
+  onSelectDay: (index: number) => void;
 }
 
-export const ForecastCarousel = ({ forecast }: ForecastCarouselProps) => {
+export const ForecastCarousel = ({ forecast, onSelectDay }: ForecastCarouselProps) => {
+  const activeForecast = forecast.find(f => f.isActive) || forecast[0];
+
   return (
-    <div className="w-full mt-6">
-      <div className="flex overflow-x-auto snap-x [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+    <div className="flex flex-col w-full">
+      <div className="flex gap-4 overflow-x-auto w-full pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
         {forecast.map((item, index) => (
-          <div 
+          <ForecastCard 
             key={index} 
-            className={`snap-start shrink-0 mr-3 ${index === 0 ? 'ml-6' : ''} ${index === forecast.length - 1 ? 'mr-6' : ''}`}
-          >
-            <ForecastCard {...item} />
-          </div>
+            {...item} 
+            onClick={() => onSelectDay(index)} 
+          />
         ))}
       </div>
+      
+      {activeForecast?.hourly && activeForecast.hourly.length > 0 && (
+        <HourlyChart data={activeForecast.hourly} />
+      )}
     </div>
   );
 };
