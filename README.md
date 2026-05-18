@@ -10,6 +10,7 @@ Aplicação fullstack de clima com integração à API OpenWeatherMap, persistê
 - [Elison oliveira](https://github.com/elison-oliveira)
 - [Kauã Santiago](https://github.com/KauaS4ntiago)
 - [Wagner](https://github.com/Wagner0135)
+- [William rodrigues](https://github.com/Bobonimo111)
 
 
 ---
